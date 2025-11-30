@@ -3,176 +3,179 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Country PDF Presentations</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body class="bg-light">
-        <div class="container mt-5">
-            <h1 class="text-center mb-4">Country PDF Presentations</h1>
-            
-            <div class="row">
-                <!-- China -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h3>🇨🇳 China PDF</h3>
-                            <p>Basic facts, dynasties, scenic spots, cuisine</p>
-                            <a href="/china" class="btn btn-danger">View China PDF</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pakistan -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h3>🇵🇰 Pakistan PDF</h3>
-                            <p>Geography, history, tourism, culture</p>
-                            <a href="/pakistan" class="btn btn-success">View Pakistan PDF</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Kenya -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h3>🇰🇪 Kenya PDF</h3>
-                            <p>Wildlife, Mount Kenya, Mombasa, food</p>
-                            <a href="/kenya" class="btn btn-warning">View Kenya PDF</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
+def index():
+    return render_template('index.html')
 
 @app.route('/china')
 def china():
-    return """
-    <div class="container mt-4">
-        <a href="/" class="btn btn-secondary">← Back</a>
-        <h1 class="text-center">🇨🇳 CHINA PDF CONTENT</h1>
-        
-        <div class="card mt-4">
-            <div class="card-body">
-                <h3>BASIC FACTS</h3>
-                <p>• Size: 5,250 km × 5,500 km</p>
-                <p>• Population: Largest in world</p>
-                <p>• History: 4,000+ years</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>DYNASTIES</h3>
-                <p>Xia, Shang, Zhou, Qin, Han, Tang, Song, Ming, Qing</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>SCENIC SPOTS</h3>
-                <p>• Forbidden City</p>
-                <p>• Great Wall</p>
-                <p>• Summer Palace</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>CUISINE</h3>
-                <p>• Peking Duck</p>
-                <p>• Hot Pot</p>
-                <p>• Dim Sum</p>
-            </div>
-        </div>
-    </div>
-    """
+    china_data = {
+        'basic_facts': {
+            'size': '5,250 km (east-west) × 5,500 km (north-south)',
+            'border': '20,000 km land border, 14,000 km shoreline',
+            'population': 'Largest in the world',
+            'history': 'Over 4,000 years of recorded history'
+        },
+        'dynasties': [
+            {'name': 'Xia Dynasty', 'period': 'ca. 2100-1600 BCE'},
+            {'name': 'Shang Dynasty', 'period': 'ca. 1600-1050 BCE'},
+            {'name': 'Zhou Dynasty', 'period': '1046-256 BCE'},
+            {'name': 'Qin Dynasty', 'period': '221-206 BCE'},
+            {'name': 'Han Dynasty', 'period': '206 BCE-220 CE'},
+            {'name': 'Sui Dynasty', 'period': '581-618 CE'},
+            {'name': 'Tang Dynasty', 'period': '618-906 CE'},
+            {'name': 'Song Dynasty', 'period': '960-1279 CE'},
+            {'name': 'Yuan Dynasty', 'period': '1279-1368 CE'},
+            {'name': 'Ming Dynasty', 'period': '1368-1644 CE'},
+            {'name': 'Qing Dynasty', 'period': '1644-1912 CE'},
+            {'name': 'Republic', 'period': '1912-1949 CE'},
+            {'name': 'People\'s Republic', 'period': '1949-present'}
+        ],
+        'historical_spots': [
+            {
+                'name': 'The Forbidden City',
+                'description': 'Imperial Palace located in the heart of Beijing'
+            },
+            {
+                'name': 'The Great Wall',
+                'description': 'Defensive structures along northern borders'
+            },
+            {
+                'name': 'The Summer Palace',
+                'description': 'Imperial garden with lakes, gardens, and palaces'
+            }
+        ],
+        'natural_spots': [
+            {
+                'name': 'Zhangjiajie National Park',
+                'description': 'Known for beautiful rock formations'
+            },
+            {
+                'name': 'Yangtze River',
+                'description': 'China\'s longest and most important river'
+            },
+            {
+                'name': 'West Lake',
+                'description': 'Inspires poets and painters throughout history'
+            }
+        ],
+        'cuisine': [
+            {
+                'name': 'Peking Roasted Duck',
+                'description': 'Well-known dish from Beijing, considered a national meal'
+            },
+            {
+                'name': 'Chinese Hot Pot',
+                'description': 'Interactive meal with simmering pot of soup'
+            },
+            {
+                'name': 'Dim Sum',
+                'description': 'Small plates of dumplings served with tea'
+            }
+        ]
+    }
+    return render_template('china.html', data=china_data)
 
 @app.route('/pakistan')
 def pakistan():
-    return """
-    <div class="container mt-4">
-        <a href="/" class="btn btn-secondary">← Back</a>
-        <h1 class="text-center">🇵🇰 PAKISTAN PDF CONTENT</h1>
-        
-        <div class="card mt-4">
-            <div class="card-body">
-                <h3>GEOGRAPHY</h3>
-                <p>• Borders: India, China, Afghanistan, Iran</p>
-                <p>• Population: 240 million</p>
-                <p>• Capital: Islamabad</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>HISTORY</h3>
-                <p>• Founded: 1947</p>
-                <p>• Indus Valley Civilization</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>TOURISM</h3>
-                <p>• Hunza Valley</p>
-                <p>• Badshahi Mosque</p>
-                <p>• K2 Mountain</p>
-            </div>
-        </div>
-    </div>
-    """
+    pakistan_data = {
+        'geography': {
+            'location': 'South Asia',
+            'borders': 'India, China, Afghanistan, Iran',
+            'features': 'Mountains, deserts, fertile plains, rivers',
+            'capital': 'Islamabad',
+            'largest_city': 'Karachi',
+            'population': '240 million (5th most populous)'
+        },
+        'history': {
+            'founded': '1947',
+            'civilization': 'Indus Valley Civilization (2600 BC)',
+            'influences': 'Mughal, Persian, British'
+        },
+        'economy': {
+            'sectors': 'Agriculture, textiles, industry',
+            'produces': 'Wheat, rice, cotton',
+            'resources': 'Minerals, coal, natural gas',
+            'project': 'China-Pakistan Economic Corridor (CPEC)'
+        },
+        'tourism': [
+            'Hunza, Skardu, and Fairy Meadows in northern regions',
+            'Badshahi Mosque in Lahore',
+            'Mohenjo-Daro and Taxila',
+            'Karakoram Highway'
+        ],
+        'wildlife': [
+            'Snow leopards',
+            'Markhor (wild goats)',
+            'Bengal tigers',
+            'Indus river dolphins'
+        ],
+        'festivals': [
+            'Eid-ul-Fitr and Eid-ul-Adha',
+            'Basant (Dragon Festival) in Punjab',
+            'Shandur Polo Festival',
+            'Pakistan Day (March 23)',
+            'Independence Day (August 14)'
+        ],
+        'cuisine': [
+            'Biryani',
+            'Nihari',
+            'Chapli Kebabs',
+            'Saag'
+        ],
+        'curiosities': [
+            'Home to K2, second highest mountain in the world',
+            'Indus Valley Civilization location',
+            'Largest canal irrigation system in the world',
+            'Islamabad considered one of most beautiful capitals',
+            'Cricket most popular, field hockey national sport'
+        ]
+    }
+    return render_template('pakistan.html', data=pakistan_data)
 
 @app.route('/kenya')
 def kenya():
-    return """
-    <div class="container mt-4">
-        <a href="/" class="btn btn-secondary">← Back</a>
-        <h1 class="text-center">🇰🇪 KENYA PDF CONTENT</h1>
-        
-        <div class="card mt-4">
-            <div class="card-body">
-                <h3>WILDLIFE - BIG FIVE</h3>
-                <p>• Lion, Leopard, Rhino, Elephant, Buffalo</p>
-                <p>• Great Migration in Maasai Mara</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>MOUNT KENYA</h3>
-                <p>• Second highest in Africa</p>
-                <p>• UNESCO World Heritage Site</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>MOMBASA</h3>
-                <p>• Coastal city with Fort Jesus</p>
-                <p>• Beautiful beaches</p>
-            </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3>FOOD</h3>
-                <p>• Nyama Choma (grilled meat)</p>
-                <p>• Ugali</p>
-                <p>• Sukuma Wiki</p>
-            </div>
-        </div>
-    </div>
-    """
+    kenya_data = {
+        'big_five': [
+            'Lion', 'Leopard', 'Rhino', 'Elephant', 'Buffalo'
+        ],
+        'other_animals': [
+            'Giraffes', 'Zebras', 'Cheetahs', 'Hippos'
+        ],
+        'attractions': {
+            'migration': 'Great Migration in Maasai Mara',
+            'mount_kenya': {
+                'height': 'Second-highest in Africa',
+                'type': 'Ancient extinct volcano',
+                'status': 'UNESCO World Heritage Site',
+                'fact': 'Country named after this mountain'
+            },
+            'mombasa': {
+                'description': 'Second-largest city and main port',
+                'influences': 'African, Arabic, Portuguese',
+                'landmark': 'Fort Jesus (16th-century Portuguese fort)',
+                'feature': 'Beautiful white-sand beaches'
+            }
+        },
+        'cuisine': [
+            {
+                'name': 'Nyama Choma',
+                'description': 'National dish - grilled meat (goat or beef)'
+            },
+            {
+                'name': 'Ugali',
+                'description': 'Staple food made from maize flour'
+            },
+            {
+                'name': 'Sukuma Wiki',
+                'description': 'Collard greens, common side dish'
+            },
+            {
+                'name': 'Chapati',
+                'description': 'Flatbread influenced by Indian cuisine'
+            }
+        ]
+    }
+    return render_template('kenya.html', data=kenya_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
