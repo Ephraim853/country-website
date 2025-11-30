@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Kenya - World Countries Explorer{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1 class="display-4 text-warning">🇰🇪 Kenya</h1>
+            <p class="lead">The wonders of Africa - nature, culture, and adventure</p>
+        </div>
+    </div>
+
+    <!-- Big Five -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">The Big Five</h2>
+            <div class="row">
+                {% for animal in data.big_five %}
+                <div class="col-md-2 mb-3 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ animal }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Other Animals -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Other Famous Animals</h2>
+            <div class="row">
+                {% for animal in data.other_animals %}
+                <div class="col-md-3 mb-2">
+                    <span class="badge bg-success">{{ animal }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Great Migration -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h3 class="card-title">The Great Migration</h3>
+                    <p class="card-text lead">{{ data.attractions.migration }}</p>
+                    <p class="card-text">One of the "Seven New Wonders of the World"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mount Kenya -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Mount Kenya</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Key Facts</h5>
+                            <p><strong>Height:</strong> {{ data.attractions.mount_kenya.height }}</p>
+                            <p><strong>Type:</strong> {{ data.attractions.mount_kenya.type }}</p>
+                            <p><strong>Status:</strong> {{ data.attractions.mount_kenya.status }}</p>
+                            <p><strong>Fun Fact:</strong> {{ data.attractions.mount_kenya.fact }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Description</h5>
+                            <p class="card-text">
+                                Rising dramatically from the central highlands, Mount Kenya is not only a 
+                                challenging peak for climbers but also a source of national pride. 
+                                Interestingly, the country's name comes directly from this magnificent mountain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mombasa -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Mombasa - Coastal City</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">City Information</h5>
+                            <p><strong>Role:</strong> {{ data.attractions.mombasa.description }}</p>
+                            <p><strong>Cultural Influences:</strong> {{ data.attractions.mombasa.influences }}</p>
+                            <p><strong>Key Landmark:</strong> {{ data.attractions.mombasa.landmark }}</p>
+                            <p><strong>Famous For:</strong> {{ data.attractions.mombasa.feature }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Description</h5>
+                            <p class="card-text">
+                                Mombasa is a city with a rich, layered history, visible in its architecture 
+                                and culture. Fort Jesus stands as a reminder of its strategic past, while 
+                                the beaches offer a perfect tropical getaway.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuisine -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Flavorful Kenyan Food</h2>
+            <div class="row">
+                {% for dish in data.cuisine %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <p class="card-text">{{ dish.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Closing -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-dark text-white">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Asante Sana! (Thank You Very Much)</h3>
+                    <p class="card-text lead">
+                        Kenya offers an unforgettable experience from safari adventures to cultural richness 
+                        and stunning beaches. It's a country of breathtaking contrasts that stays with you 
+                        long after you've left. Karibu! (Welcome!)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
