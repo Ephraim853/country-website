@@ -2,174 +2,177 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# EXACT PDF CONTENT - Maintaining original structure
-pdf_content = {
-    'china': {
-        'title': 'CHINA',
-        'presenter': 'Asiru 阿斯如',
-        'slides': [
-            {'type': 'cover', 'title': 'CHINA', 'content': ''},
-            {'type': 'agenda', 'title': 'AGENDA', 'content': [
-                'Basic facts about China',
-                'The historical timeline of Chinese dynasties', 
-                'China\'s scenic spots',
-                'Must-try cuisine'
-            ]},
-            {'type': 'presenter', 'title': 'PRESENTER', 'content': 'Asiru 阿斯如'},
-            {'type': 'greeting', 'title': '大家好 (Dà jiā hǎo)', 'content': 'Hello, everyone'},
-            {'type': 'basic_facts', 'title': 'BASIC FACTS', 'content': [
-                'China spans approximately 5,250 km from east to west and 5,500 km from north to south.',
-                'Land border: 20,000 km long | Shoreline: 14,000 km long.',
-                'Biggest population of any country in the world.',
-                'Largest country in Asia.',
-                'World\'s biggest temperature difference between northern and southern borders.',
-                'Over 4,000 years of recorded history.'
-            ]},
-            {'type': 'dynasties', 'title': 'THE DYNASTIES', 'content': [
-                'Xia Dynasty (ca. 2100-1600 BCE)',
-                'Shang Dynasty (ca. 1600-1050 BCE)', 
-                'Zhou Dynasty (1046-256 BCE)',
-                'Qin Dynasty (221-206 BCE)',
-                'Han Dynasty (206 BCE-220 CE)',
-                'Sui Dynasty (581-618 CE)',
-                'Tang Dynasty (618-906 CE)',
-                'Song Dynasty (960-1279 CE)',
-                'Yuan Dynasty (1279-1368 CE)',
-                'Ming Dynasty (1368-1644 CE)',
-                'Qing Dynasty (1644-1912 CE)',
-                'Republic (1912-1949 CE)',
-                'People\'s Republic (1949-present)'
-            ]},
-            {'type': 'historical_spots', 'title': 'HISTORICAL SCENIC SPOTS', 'content': [
-                'THE FORBIDDEN CITY: Imperial Palace in heart of Beijing, must-see for travelers.',
-                'THE GREAT WALL: Defensive structures along northern borders.',
-                'THE SUMMER PALACE: Lakes, gardens, palaces - imperial garden during Qing dynasty.'
-            ]},
-            {'type': 'natural_spots', 'title': 'NATURAL SCENIC SPOTS', 'content': [
-                'ZHANGJIAJIE NATIONAL PARK: Beautiful rock formations in Wulingyuan Scenic Area.',
-                'YANGTZE RIVER: China\'s longest and most important river, world\'s third longest.',
-                'WEST LAKE: Beauty inspired poets, painters throughout Chinese history.'
-            ]},
-            {'type': 'cuisine', 'title': 'MUST-TRY DISHES', 'content': [
-                'PEKING ROASTED DUCK: Well-known Beijing dish, considered national meal.',
-                'CHINESE HOT POT: Interactive meal with simmering pot of soup.',
-                'DIM SUM: Small plates of dumplings served with tea.'
-            ]},
-            {'type': 'closing', 'title': '谢谢你 (Xiè xiè nín)', 'content': 'Thank you'}
-        ]
-    },
-    'pakistan': {
-        'title': 'PAKISTAN',
-        'presenter': 'MUHAMMAD USMAN',
-        'slides': [
-            {'type': 'cover', 'title': 'PAKISTAN', 'content': 'COUNTRY INTRODUCTION'},
-            {'type': 'intro', 'title': 'COUNTRY INTRODUCTION', 'content': 'South Asian country known for diverse landscapes, rich history, vibrant culture. Iconic landmarks: Badshahi Mosque, K2, Mohenjo-Daro.'},
-            {'type': 'geography', 'title': 'GEOGRAPHY OF PAKISTAN', 'content': [
-                'Location: South Asia, borders India, China, Afghanistan, Iran.',
-                'Coastline along Arabian Sea.',
-                'Features: Mountains, deserts, fertile plains, rivers.',
-                'Himalayas & Karakoram contain world\'s highest peaks including K2.',
-                'Capital: Islamabad | Largest city: Karachi',
-                'Population: 240 million (5th most populous)'
-            ]},
-            {'type': 'history', 'title': 'HISTORY OF PAKISTAN', 'content': [
-                'Founded: 1947 after independence from British rule.',
-                'Homeland for Muslims in Indian subcontinent.',
-                'Historical heritage: Indus Valley Civilization (2600 BC).',
-                'Influences: Mughal, Persian, British rule.'
-            ]},
-            {'type': 'economy', 'title': 'THE ECONOMY OF PAKISTAN', 'content': [
-                'Based on: Agriculture, textiles, industry.',
-                'Major producer: Wheat, rice, cotton.',
-                'Rich in: Minerals, coal, natural gas.',
-                'China-Pakistan Economic Corridor (CPEC) major infrastructure project.',
-                'Financial capital: Karachi - major banking center.'
-            ]},
-            {'type': 'tourism', 'title': 'TOURISM IN PAKISTAN', 'content': [
-                'Northern regions: Hunza, Skardu, Fairy Meadows attract trekkers.',
-                'Cultural sites: Badshahi Mosque, Mohenjo-Daro, Taxila.',
-                'Karakoram Highway: One of highest paved roads, connects to China.'
-            ]},
-            {'type': 'wildlife', 'title': 'NATURAL LIFE IN PAKISTAN', 'content': [
-                'Snow leopards, markhor (wild goats), Bengal tigers, Indus river dolphins.',
-                'National parks: Deosai Plains, Hingol, Margalla Hills.',
-                'Arabian Sea: Dolphins, turtles.'
-            ]},
-            {'type': 'festivals', 'title': 'FESTIVALS AND TRADITIONS', 'content': [
-                'Eid-ul-Fitr and Eid-ul-Adha (Islamic festivals).',
-                'Basant (Dragon Festival) in Punjab - marks spring arrival.',
-                'Shandur Polo Festival - world\'s highest polo ground.',
-                'Pakistan Day (March 23), Independence Day (August 14).'
-            ]},
-            {'type': 'cuisine', 'title': 'PAKISTANI CULTURE AND CUISINE', 'content': [
-                'Influences: South Asian, Persian, Central Asian.',
-                'Language: Urdu unites regions.',
-                'Dishes: Biryani, nihari, chapli kebabs, saag.',
-                'Tea (chai) staple beverage, mangoes world-famous.'
-            ]},
-            {'type': 'curiosities', 'title': 'CURIOSITIES ABOUT PAKISTAN', 'content': [
-                'Home to K2 - second highest mountain in world.',
-                'Indus Valley Civilization location.',
-                'Largest canal irrigation system in world.',
-                'Islamabad - one of most beautiful capitals.',
-                'Cricket most popular, field hockey national sport.'
-            ]},
-            {'type': 'closing', 'title': 'THANK YOU', 'content': ''}
-        ]
-    },
-    'kenya': {
-        'title': 'EXPLORING KENYA',
-        'presenter': 'EPHRAIM WAMAE',
-        'slides': [
-            {'type': 'cover', 'title': 'THE WONDERS OF AFRICA', 'subtitle': 'EXPLORING KENYA'},
-            {'type': 'intro', 'title': 'KENYA', 'content': 'A LAND OF SPLENDID DIVERSITY. A JOURNEY THROUGH NATURE, CULTURE, AND CITIES.'},
-            {'type': 'wildlife', 'title': 'BIG FIVE', 'content': [
-                'Home to "Big Five": Lion, Leopard, Rhino, Elephant, Buffalo.',
-                'Great Migration in Maasai Mara - "Seven New Wonders of the World".',
-                'Other animals: Giraffes, Zebras, Cheetahs, Hippos.'
-            ]},
-            {'type': 'attractions', 'title': 'MOUNT KENYA', 'content': [
-                'Highest mountain in Kenya, second-highest in Africa.',
-                'Ancient extinct volcano.',
-                'UNESCO World Heritage Site.',
-                'Country named after this mountain!',
-                'National pride and challenging peak for climbers.'
-            ]},
-            {'type': 'cities', 'title': 'MOMBASA - COASTAL CITY', 'content': [
-                'Kenya\'s second-largest city and main port.',
-                'Blend of African, Arabic, Portuguese influences.',
-                'Key landmark: Fort Jesus (16th-century Portuguese fort).',
-                'Famous for beautiful white-sand beaches.',
-                'Rich, layered history visible in architecture and culture.'
-            ]},
-            {'type': 'cuisine', 'title': 'THE FLAVORFUL FOOD', 'content': [
-                'NYAMA CHOMA: National dish - grilled meat (goat or beef).',
-                'UGALI: Staple food from maize flour, eaten with stews.',
-                'SUKUMA WIKI: Collard greens, common side dish.',
-                'CHAPATI: Flatbread influenced by Indian cuisine.',
-                'Hearty and flavorful cuisine.'
-            ]},
-            {'type': 'closing', 'title': 'ASANTE SANA', 'content': [
-                'Thank You Very Much in Swahili.',
-                'Unforgettable experience: safari adventures, cultural richness, stunning beaches.',
-                'Country of breathtaking contrasts - from lion roars to ocean waves.',
-                'Karibu (Welcome)!'
-            ]}
-        ]
-    }
-}
-
 @app.route('/')
 def home():
-    return render_template('home.html', countries=pdf_content)
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Country PDF Presentations</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Country PDF Presentations</h1>
+            
+            <div class="row">
+                <!-- China -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3>🇨🇳 China PDF</h3>
+                            <p>Basic facts, dynasties, scenic spots, cuisine</p>
+                            <a href="/china" class="btn btn-danger">View China PDF</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pakistan -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3>🇵🇰 Pakistan PDF</h3>
+                            <p>Geography, history, tourism, culture</p>
+                            <a href="/pakistan" class="btn btn-success">View Pakistan PDF</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kenya -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3>🇰🇪 Kenya PDF</h3>
+                            <p>Wildlife, Mount Kenya, Mombasa, food</p>
+                            <a href="/kenya" class="btn btn-warning">View Kenya PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
 
-@app.route('/presentation/<country_name>')
-def show_presentation(country_name):
-    if country_name in pdf_content:
-        return render_template('pdf_presentation.html', 
-                             country=country_name, 
-                             data=pdf_content[country_name])
-    return "Presentation not found"
+@app.route('/china')
+def china():
+    return """
+    <div class="container mt-4">
+        <a href="/" class="btn btn-secondary">← Back</a>
+        <h1 class="text-center">🇨🇳 CHINA PDF CONTENT</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>BASIC FACTS</h3>
+                <p>• Size: 5,250 km × 5,500 km</p>
+                <p>• Population: Largest in world</p>
+                <p>• History: 4,000+ years</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>DYNASTIES</h3>
+                <p>Xia, Shang, Zhou, Qin, Han, Tang, Song, Ming, Qing</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>SCENIC SPOTS</h3>
+                <p>• Forbidden City</p>
+                <p>• Great Wall</p>
+                <p>• Summer Palace</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>CUISINE</h3>
+                <p>• Peking Duck</p>
+                <p>• Hot Pot</p>
+                <p>• Dim Sum</p>
+            </div>
+        </div>
+    </div>
+    """
+
+@app.route('/pakistan')
+def pakistan():
+    return """
+    <div class="container mt-4">
+        <a href="/" class="btn btn-secondary">← Back</a>
+        <h1 class="text-center">🇵🇰 PAKISTAN PDF CONTENT</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>GEOGRAPHY</h3>
+                <p>• Borders: India, China, Afghanistan, Iran</p>
+                <p>• Population: 240 million</p>
+                <p>• Capital: Islamabad</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>HISTORY</h3>
+                <p>• Founded: 1947</p>
+                <p>• Indus Valley Civilization</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>TOURISM</h3>
+                <p>• Hunza Valley</p>
+                <p>• Badshahi Mosque</p>
+                <p>• K2 Mountain</p>
+            </div>
+        </div>
+    </div>
+    """
+
+@app.route('/kenya')
+def kenya():
+    return """
+    <div class="container mt-4">
+        <a href="/" class="btn btn-secondary">← Back</a>
+        <h1 class="text-center">🇰🇪 KENYA PDF CONTENT</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>WILDLIFE - BIG FIVE</h3>
+                <p>• Lion, Leopard, Rhino, Elephant, Buffalo</p>
+                <p>• Great Migration in Maasai Mara</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>MOUNT KENYA</h3>
+                <p>• Second highest in Africa</p>
+                <p>• UNESCO World Heritage Site</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>MOMBASA</h3>
+                <p>• Coastal city with Fort Jesus</p>
+                <p>• Beautiful beaches</p>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3>FOOD</h3>
+                <p>• Nyama Choma (grilled meat)</p>
+                <p>• Ugali</p>
+                <p>• Sukuma Wiki</p>
+            </div>
+        </div>
+    </div>
+    """
 
 if __name__ == '__main__':
     app.run(debug=True)
