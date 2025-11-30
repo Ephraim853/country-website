@@ -2,114 +2,65 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Complete presentation data from your PDFs
-countries_data = {
+# EXACT data from your PDF slides
+presentations = {
     'china': {
         'title': 'CHINA',
-        'flag': '🇨🇳',
+        'presenter': 'Asiru 阿斯如',
         'slides': [
-            {'type': 'title', 'title': 'CHINA', 'subtitle': 'Ancient Civilization, Modern Wonder'},
-            {'type': 'facts', 'title': 'Basic Facts', 'content': [
-                'Size: 5,250 km east-west × 5,500 km north-south',
-                'Border: 20,000 km land, 14,000 km shoreline', 
-                'Population: Largest in the world',
-                'History: Over 4,000 years of recorded history'
-            ]},
-            {'type': 'history', 'title': 'Chinese Dynasties', 'content': [
-                'Xia Dynasty (2100-1600 BCE)',
-                'Shang Dynasty (1600-1050 BCE)',
-                'Zhou Dynasty (1046-256 BCE)',
-                'Qin Dynasty (221-206 BCE)',
-                'Han Dynasty (206 BCE-220 CE)'
-            ]},
-            {'type': 'attractions', 'title': 'Must-Visit Places', 'content': [
-                'The Forbidden City - Imperial Palace in Beijing',
-                'The Great Wall - Defensive structures',
-                'The Summer Palace - Imperial gardens',
-                'Zhangjiajie National Park - Beautiful rock formations'
-            ]},
-            {'type': 'cuisine', 'title': 'Must-Try Dishes', 'content': [
-                'Peking Roasted Duck - National dish',
-                'Chinese Hot Pot - Interactive meal',
-                'Dim Sum - Small plates with tea'
-            ]}
+            {'type': 'title', 'content': 'CHINA', 'subtitle': ''},
+            {'type': 'agenda', 'content': 'Basic facts, Historical timeline, Scenic spots, Must-try cuisine'},
+            {'type': 'hello', 'content': '大家好 - Hello everyone'},
+            {'type': 'basic_facts', 'content': 'Size: 5,250km × 5,500km, Population: Largest in world, History: 4,000+ years'},
+            {'type': 'dynasties', 'content': 'Xia, Shang, Zhou, Qin, Han, Tang, Song, Ming, Qing dynasties'},
+            {'type': 'historical_spots', 'content': 'Forbidden City, Great Wall, Summer Palace'},
+            {'type': 'natural_spots', 'content': 'Zhangjiajie, Yangtze River, West Lake'},
+            {'type': 'cuisine', 'content': 'Peking Duck, Hot Pot, Dim Sum'},
+            {'type': 'thank_you', 'content': '谢谢你 - Thank you'}
         ]
     },
     'pakistan': {
         'title': 'PAKISTAN', 
-        'flag': '🇵🇰',
+        'presenter': 'MUHAMMAD USMAN',
         'slides': [
-            {'type': 'title', 'title': 'PAKISTAN', 'subtitle': 'Land of Diverse Landscapes'},
-            {'type': 'facts', 'title': 'Geography', 'content': [
-                'Location: South Asia',
-                'Borders: India, China, Afghanistan, Iran',
-                'Capital: Islamabad',
-                'Population: 240 million (5th largest)'
-            ]},
-            {'type': 'history', 'title': 'History & Culture', 'content': [
-                'Founded: 1947 after British rule',
-                'Ancient: Indus Valley Civilization (2600 BC)',
-                'Influences: Mughal, Persian, British',
-                'Language: Urdu unites different regions'
-            ]},
-            {'type': 'attractions', 'title': 'Tourism Highlights', 'content': [
-                'Northern Regions: Hunza, Skardu, Fairy Meadows',
-                'Badshahi Mosque in Lahore',
-                'Mohenjo-Daro ancient city',
-                'Karakoram Highway - world\'s highest paved road'
-            ]},
-            {'type': 'cuisine', 'title': 'Pakistani Cuisine', 'content': [
-                'Biryani - Flavorful rice dish',
-                'Nihari - Spicy slow-cooked stew',
-                'Chapli Kebabs - Minced meat patties',
-                'Saag - Leafy greens dish'
-            ]}
+            {'type': 'title', 'content': 'PAKISTAN', 'subtitle': 'Diverse landscapes, rich history, vibrant culture'},
+            {'type': 'geography', 'content': 'South Asia, borders India/China/Afghanistan/Iran, mountains/deserts/plains'},
+            {'type': 'history', 'content': 'Founded 1947, Indus Valley Civilization, Mughal/Persian/British influences'},
+            {'type': 'economy', 'content': 'Agriculture, textiles, China-Pakistan Economic Corridor (CPEC)'},
+            {'type': 'tourism', 'content': 'Hunza Valley, Badshahi Mosque, Mohenjo-Daro, Karakoram Highway'},
+            {'type': 'wildlife', 'content': 'Snow leopards, markhor, Bengal tigers, Indus dolphins'},
+            {'type': 'festivals', 'content': 'Eid, Basant, Shandur Polo Festival, Pakistan Day'},
+            {'type': 'cuisine', 'content': 'Biryani, nihari, chapli kebabs, saag'},
+            {'type': 'curiosities', 'content': 'K2 mountain, ancient civilization, largest irrigation system'}
         ]
     },
     'kenya': {
         'title': 'KENYA',
-        'flag': '🇰🇪', 
+        'presenter': 'EPHRAIM WAMAE', 
         'slides': [
-            {'type': 'title', 'title': 'KENYA', 'subtitle': 'The Wonders of Africa'},
-            {'type': 'facts', 'title': 'Wildlife & Nature', 'content': [
-                'Big Five: Lion, Leopard, Rhino, Elephant, Buffalo',
-                'Great Migration in Maasai Mara',
-                'Mount Kenya - 2nd highest in Africa',
-                'Diverse landscapes from savanna to beaches'
-            ]},
-            {'type': 'attractions', 'title': 'Key Attractions', 'content': [
-                'Maasai Mara National Reserve',
-                'Mount Kenya - UNESCO World Heritage Site', 
-                'Mombasa - Coastal city with Fort Jesus',
-                'Beautiful white-sand beaches'
-            ]},
-            {'type': 'culture', 'title': 'Culture & Cuisine', 'content': [
-                'Nyama Choma - Grilled meat national dish',
-                'Ugali - Staple maize flour porridge',
-                'Sukuma Wiki - Collard greens side dish',
-                'Rich tribal heritage and traditions'
-            ]},
-            {'type': 'highlights', 'title': 'Unique Features', 'content': [
-                'Great Migration - One of "Seven New Wonders"',
-                'Country named after Mount Kenya',
-                'Blend of African, Arabic, Portuguese influences',
-                'Friendly people and vibrant culture'
-            ]}
+            {'type': 'title', 'content': 'THE WONDERS OF AFRICA', 'subtitle': 'EXPLORING KENYA'},
+            {'type': 'intro', 'content': 'KENYA, A LAND OF SPLENDID DIVERSITY. A JOURNEY THROUGH NATURE, CULTURE, AND CITIES.'},
+            {'type': 'big_five', 'content': 'Lion, Leopard, Rhino, Elephant, Buffalo. Great Migration in Maasai Mara.'},
+            {'type': 'mount_kenya', 'content': 'Tallest mountain in Kenya, extinct volcano, UNESCO site, country named after it'},
+            {'type': 'mombasa', 'content': 'Coastal city, African/Arabic/Portuguese influences, Fort Jesus, white-sand beaches'},
+            {'type': 'cuisine', 'content': 'Nyama Choma (grilled meat), Ugali, Sukuma Wiki, Chapati'},
+            {'type': 'thank_you', 'content': 'Asante Sana - Thank you very much'}
         ]
     }
 }
 
 @app.route('/')
 def home():
-    return render_template('home.html', countries=countries_data)
+    return render_template('home.html', presentations=presentations)
 
-@app.route('/presentation/<country>')
-def presentation(country):
-    if country in countries_data:
-        return render_template('presentation.html', 
-                             country=country, 
-                             data=countries_data[country])
+@app.route('/presentation/<country_name>')
+def show_presentation(country_name):
+    if country_name in presentations:
+        return render_template('slides.html', 
+                             country=country_name, 
+                             data=presentations[country_name])
     return "Presentation not found"
 
 if __name__ == '__main__':
     app.run(debug=True)
+
