@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Pakistan - World Countries Explorer{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1 class="display-4 text-success">🇵🇰 Pakistan</h1>
+            <p class="lead">Land of diverse landscapes and rich cultural heritage</p>
+        </div>
+    </div>
+
+    <!-- Geography -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Geography</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Location:</strong> {{ data.geography.location }}</p>
+                    <p><strong>Borders:</strong> {{ data.geography.borders }}</p>
+                    <p><strong>Features:</strong> {{ data.geography.features }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Capital:</strong> {{ data.geography.capital }}</p>
+                    <p><strong>Largest City:</strong> {{ data.geography.largest_city }}</p>
+                    <p><strong>Population:</strong> {{ data.geography.population }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">History</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Founded:</strong> {{ data.history.founded }}</p>
+                    <p><strong>Ancient Civilization:</strong> {{ data.history.civilization }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Cultural Influences:</strong> {{ data.history.influences }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Economy -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Economy</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Main Sectors:</strong> {{ data.economy.sectors }}</p>
+                    <p><strong>Major Products:</strong> {{ data.economy.produces }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Natural Resources:</strong> {{ data.economy.resources }}</p>
+                    <p><strong>Major Project:</strong> {{ data.economy.project }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tourism -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Tourism</h2>
+            <div class="row">
+                {% for spot in data.tourism %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">{{ spot }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Wildlife -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Wildlife</h2>
+            <div class="row">
+                {% for animal in data.wildlife %}
+                <div class="col-md-3 mb-2">
+                    <span class="badge bg-info text-dark">{{ animal }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Festivals -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Festivals and Traditions</h2>
+            <div class="row">
+                {% for festival in data.festivals %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">{{ festival }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuisine -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Cuisine</h2>
+            <div class="row">
+                {% for dish in data.cuisine %}
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ dish }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Curiosities -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="border-bottom pb-2">Interesting Facts</h2>
+            <div class="row">
+                {% for fact in data.curiosities %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">{{ fact }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
