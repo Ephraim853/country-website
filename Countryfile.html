@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country PDF Gallery | Pinterest-Style Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #e60023 0%, #8b0000 100%);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(230, 0, 35, 0.15);
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .tagline {
+            margin-top: 15px;
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .pdf-card {
+            background-color: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .pdf-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-flag {
+            width: 40px;
+            height: 30px;
+            border-radius: 4px;
+            margin-right: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #222;
+        }
+        
+        .card-image {
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .pdf-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .pdf-icon {
+            font-size: 5rem;
+            position: absolute;
+            color: rgba(230, 0, 35, 0.15);
+            z-index: 1;
+        }
+        
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-description {
+            color: #555;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .card-highlights {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e60023;
+        }
+        
+        .card-highlights h4 {
+            color: #e60023;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-highlights ul {
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .card-highlights li {
+            margin-bottom: 5px;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: #e60023;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ad081b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(230, 0, 35, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #e60023;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .pdf-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card-content {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 25px 20px;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pdf-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Staggered card animations */
+        .pdf-card:nth-child(1) { animation-delay: 0.1s; }
+        .pdf-card:nth-child(2) { animation-delay: 0.2s; }
+        .pdf-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Country-specific color accents */
+        .pakistan-card .card-highlights {
+            border-left-color: #006600;
+        }
+        
+        .pakistan-card .btn-primary {
+            background-color: #006600;
+        }
+        
+        .pakistan-card .btn-primary:hover {
+            background-color: #004d00;
+        }
+        
+        .kenya-card .card-highlights {
+            border-left-color: #000000;
+        }
+        
+        .kenya-card .btn-primary {
+            background-color: #000000;
+        }
+        
+        .kenya-card .btn-primary:hover {
+            background-color: #333333;
+        }
+        
+        .china-card .card-highlights {
+            border-left-color: #de2910;
+        }
+        
+        .china-card .btn-primary {
+            background-color: #de2910;
+        }
+        
+        .china-card .btn-primary:hover {
+            background-color: #b3200c;
+        }
+        
+        .pdf-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(230, 0, 35, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-globe-americas"></i> Country PDF Gallery</h1>
+            <p class="subtitle">Explore three fascinating countries through detailed PDF presentations. Each card contains key information and direct links to download or view the PDFs.</p>
+            <p class="tagline">Pinterest-style layout for easy browsing</p>
+        </header>
+        
+        <main>
+            <div class="pdf-grid">
+                <!-- Pakistan PDF Card -->
+                <div class="pdf-card pakistan-card">
+                    <div class="card-header">
+                        <img src="https://flagcdn.com/w320/pk.png" alt="Pakistan Flag" class="country-flag">
+                        <h3 class="card-title">The Land of Pakistan</h3>
+                    </div>
+                    <div class="card-image">
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Pakistan Landscape">
+                        <div class="pdf-badge">PDF</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">A comprehensive introduction to Pakistan, covering its geography, history, economy, tourism, culture, and natural wonders. Learn about the diverse landscapes from the Karakoram mountains to the Indus River plains.</p>
+                        
+                        <div class="card-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>Home to K2, the world's 2nd highest mountain</li>
+                                <li>Ancient Indus Valley Civilization (2600 BCE)</li>
+                                <li>Rich cultural festivals and traditions</li>
+                                <li>Diverse wildlife including snow leopards</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-meta">
+                            <div class="author">
+                                <i class="fas fa-user"></i>
+                                <span>Muhammad Usman</span>
+                            </div>
+                            <div>
+                                <i class="far fa-file"></i>
+                                <span>13 pages</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="https://www.dropbox.com/scl/fi/dq527k0itsco6vym13ywf/The-Land-of-Pakistan.pdf?rlkey=pdf93etmpyb7g46byx304z6ru&st=5hpcew1t&dl=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            <a href="https://www.dropbox.com/scl/fi/dq527k0itsco6vym13ywf/The-Land-of-Pakistan.pdf?rlkey=pdf93etmpyb7g46byx304z6ru&st=5hpcew1t&dl=0" class="btn btn-secondary" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Preview Online
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kenya PDF Card -->
+                <div class="pdf-card kenya-card">
+                    <div class="card-header">
+                        <img src="https://flagcdn.com/w320/ke.png" alt="Kenya Flag" class="country-flag">
+                        <h3 class="card-title">EXPLORING KENYA</h3>
+                    </div>
+                    <div class="card-image">
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Kenya Wildlife">
+                        <div class="pdf-badge">PDF</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">Discover the wonders of Kenya, from the magnificent wildlife of the Maasai Mara to the stunning beaches of Mombasa. This presentation explores Kenya's natural beauty, culture, and culinary delights.</p>
+                        
+                        <div class="card-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>Home to the "Big Five" safari animals</li>
+                                <li>The Great Migration in Maasai Mara</li>
+                                <li>Mount Kenya, Africa's 2nd highest peak</li>
+                                <li>Delicious Nyama Choma (barbecue) cuisine</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-meta">
+                            <div class="author">
+                                <i class="fas fa-user"></i>
+                                <span>Epheain Wamae</span>
+                            </div>
+                            <div>
+                                <i class="far fa-file"></i>
+                                <span>8 pages</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="https://www.dropbox.com/scl/fi/fnxr11a1qz7xoft0g8ud6/EXPLORING-KENYA.pdf?rlkey=7mp2j8rufee3wb3t35gz5ou2b&st=kw3pgbhc&dl=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            <a href="https://www.dropbox.com/scl/fi/fnxr11a1qz7xoft0g8ud6/EXPLORING-KENYA.pdf?rlkey=7mp2j8rufee3wb3t35gz5ou2b&st=kw3pgbhc&dl=0" class="btn btn-secondary" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Preview Online
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- China PDF Card -->
+                <div class="pdf-card china-card">
+                    <div class="card-header">
+                        <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="country-flag">
+                        <h3 class="card-title">The World of China</h3>
+                    </div>
+                    <div class="card-image">
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="China Landscape">
+                        <div class="pdf-badge">PDF</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">An introduction to China's rich history, scenic landmarks, and delicious cuisine. Explore the dynasties that shaped the nation and must-visit locations from the Great Wall to Zhangjiajie National Park.</p>
+                        
+                        <div class="card-highlights">
+                            <h4>Key Highlights</h4>
+                            <ul>
+                                <li>4,000+ years of recorded history</li>
+                                <li>The Great Wall and Forbidden City</li>
+                                <li>Diverse cuisine including Peking Duck</li>
+                                <li>World's largest population</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="card-meta">
+                            <div class="author">
+                                <i class="fas fa-user"></i>
+                                <span>Asiru</span>
+                            </div>
+                            <div>
+                                <i class="far fa-file"></i>
+                                <span>12 pages</span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="https://www.dropbox.com/scl/fi/ibrujz2bo36qdh1xya5eb/The-world-of-China.pdf?rlkey=zfuuk0njecrsysdal1j6nvcjo&st=sdy8ldf8&dl=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            <a href="https://www.dropbox.com/scl/fi/ibrujz2bo36qdh1xya5eb/The-world-of-China.pdf?rlkey=zfuuk0njecrsysdal1j6nvcjo&st=sdy8ldf8&dl=0" class="btn btn-secondary" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Preview Online
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Country PDF Gallery &copy; 2023 | Clean Pinterest-style layout for educational resources</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-info-circle"></i> About This Project</a>
+                <a href="#"><i class="fas fa-share-alt"></i> Share Gallery</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.pdf-card');
+            const downloadButtons = document.querySelectorAll('.btn-primary');
+            const previewButtons = document.querySelectorAll('.btn-secondary');
+            
+            // Track download events
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Get the country name from the card
+                    const card = this.closest('.pdf-card');
+                    const country = card.querySelector('.card-title').textContent;
+                    
+                    // Show download confirmation (optional visual feedback)
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Downloading...';
+                    this.style.opacity = '0.8';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.opacity = '1';
+                    }, 1500);
+                    
+                    // Log download event (in a real app, you might send this to analytics)
+                    console.log(`Download initiated for: ${country}`);
+                });
+            });
+            
+            // Track preview events
+            previewButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Get the country name from the card
+                    const card = this.closest('.pdf-card');
+                    const country = card.querySelector('.card-title').textContent;
+                    
+                    // Log preview event
+                    console.log(`Preview opened for: ${country}`);
+                });
+            });
+            
+            // Add click effect to cards (opens preview)
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking any button
+                    if (e.target.closest('.btn')) {
+                        return;
+                    }
+                    
+                    // Otherwise, open the preview
+                    const previewBtn = this.querySelector('.btn-secondary');
+                    if (previewBtn) {
+                        window.open(previewBtn.href, '_blank');
+                    }
+                });
+                
+                // Add keyboard navigation
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const previewBtn = this.querySelector('.btn-secondary');
+                        if (previewBtn) {
+                            window.open(previewBtn.href, '_blank');
+                        }
+                    }
+                });
+            });
+            
+            // Simple animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe each card
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Add a subtle background animation
+            const header = document.querySelector('header');
+            let angle = 0;
+            
+            function updateGradient() {
+                angle = (angle + 0.2) % 360;
+                header.style.background = `linear-gradient(${angle}deg, #e60023 0%, #8b0000 100%)`;
+                requestAnimationFrame(updateGradient);
+            }
+            
+            // Start the gradient animation
+            updateGradient();
+        });
+    </script>
+</body>
+</html>
