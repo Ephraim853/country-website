@@ -82,6 +82,12 @@
             border-bottom: 1px solid #f0f0f0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title-container {
+            display: flex;
+            align-items: center;
         }
         
         .country-flag {
@@ -97,6 +103,16 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #222;
+        }
+        
+        .compressed-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
         
         .card-image {
@@ -178,6 +194,12 @@
         }
         
         .author {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .file-size {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -277,6 +299,16 @@
             .btn-container {
                 flex-direction: column;
             }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .compressed-badge {
+                align-self: flex-start;
+            }
         }
         
         @media (max-width: 480px) {
@@ -363,6 +395,17 @@
             z-index: 2;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
+        
+        .download-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -370,7 +413,7 @@
         <header>
             <h1><i class="fas fa-globe-americas"></i> Country PDF Gallery</h1>
             <p class="subtitle">Explore three fascinating countries through detailed PDF presentations. Each card contains key information and direct links to download or view the PDFs.</p>
-            <p class="tagline">Pinterest-style layout for easy browsing</p>
+            <p class="tagline">Pinterest-style layout for easy browsing • Compressed files for faster downloads</p>
         </header>
         
         <main>
@@ -378,8 +421,11 @@
                 <!-- Pakistan PDF Card -->
                 <div class="pdf-card pakistan-card">
                     <div class="card-header">
-                        <img src="https://flagcdn.com/w320/pk.png" alt="Pakistan Flag" class="country-flag">
-                        <h3 class="card-title">The Land of Pakistan</h3>
+                        <div class="card-title-container">
+                            <img src="https://flagcdn.com/w320/pk.png" alt="Pakistan Flag" class="country-flag">
+                            <h3 class="card-title">The Land of Pakistan</h3>
+                        </div>
+                        <span class="compressed-badge">Compressed</span>
                     </div>
                     <div class="card-image">
                         <i class="fas fa-file-pdf pdf-icon"></i>
@@ -404,17 +450,17 @@
                                 <i class="fas fa-user"></i>
                                 <span>Muhammad Usman</span>
                             </div>
-                            <div>
-                                <i class="far fa-file"></i>
-                                <span>13 pages</span>
+                            <div class="file-size">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Smaller file</span>
                             </div>
                         </div>
                         
                         <div class="btn-container">
-                            <a href="https://www.dropbox.com/scl/fi/dq527k0itsco6vym13ywf/The-Land-of-Pakistan.pdf?rlkey=pdf93etmpyb7g46byx304z6ru&st=5hpcew1t&dl=1" class="btn btn-primary" target="_blank">
-                                <i class="fas fa-download"></i> Download PDF
+                            <a href="https://www.dropbox.com/scl/fi/pgf24txs0mdn4akk30keh/The-Land-of-Pakistan-_compressed.pdf?rlkey=funfs28x71lao2rnd25r4y4l8&st=k4w2fasu&dl=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-download"></i> Download PDF (Compressed)
                             </a>
-                            <a href="https://www.dropbox.com/scl/fi/dq527k0itsco6vym13ywf/The-Land-of-Pakistan.pdf?rlkey=pdf93etmpyb7g46byx304z6ru&st=5hpcew1t&dl=0" class="btn btn-secondary" target="_blank">
+                            <a href="https://www.dropbox.com/scl/fi/pgf24txs0mdn4akk30keh/The-Land-of-Pakistan-_compressed.pdf?rlkey=funfs28x71lao2rnd25r4y4l8&st=k4w2fasu&dl=0" class="btn btn-secondary" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Preview Online
                             </a>
                         </div>
@@ -424,8 +470,11 @@
                 <!-- Kenya PDF Card -->
                 <div class="pdf-card kenya-card">
                     <div class="card-header">
-                        <img src="https://flagcdn.com/w320/ke.png" alt="Kenya Flag" class="country-flag">
-                        <h3 class="card-title">EXPLORING KENYA</h3>
+                        <div class="card-title-container">
+                            <img src="https://flagcdn.com/w320/ke.png" alt="Kenya Flag" class="country-flag">
+                            <h3 class="card-title">EXPLORING KENYA</h3>
+                        </div>
+                        <span class="compressed-badge" style="background-color: #666;">Original</span>
                     </div>
                     <div class="card-image">
                         <i class="fas fa-file-pdf pdf-icon"></i>
@@ -450,8 +499,8 @@
                                 <i class="fas fa-user"></i>
                                 <span>Epheain Wamae</span>
                             </div>
-                            <div>
-                                <i class="far fa-file"></i>
+                            <div class="file-size">
+                                <i class="fas fa-weight-hanging"></i>
                                 <span>8 pages</span>
                             </div>
                         </div>
@@ -470,8 +519,11 @@
                 <!-- China PDF Card -->
                 <div class="pdf-card china-card">
                     <div class="card-header">
-                        <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="country-flag">
-                        <h3 class="card-title">The World of China</h3>
+                        <div class="card-title-container">
+                            <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="country-flag">
+                            <h3 class="card-title">The World of China</h3>
+                        </div>
+                        <span class="compressed-badge">Compressed</span>
                     </div>
                     <div class="card-image">
                         <i class="fas fa-file-pdf pdf-icon"></i>
@@ -496,17 +548,17 @@
                                 <i class="fas fa-user"></i>
                                 <span>Asiru</span>
                             </div>
-                            <div>
-                                <i class="far fa-file"></i>
-                                <span>12 pages</span>
+                            <div class="file-size">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Smaller file</span>
                             </div>
                         </div>
                         
                         <div class="btn-container">
-                            <a href="https://www.dropbox.com/scl/fi/ibrujz2bo36qdh1xya5eb/The-world-of-China.pdf?rlkey=zfuuk0njecrsysdal1j6nvcjo&st=sdy8ldf8&dl=1" class="btn btn-primary" target="_blank">
-                                <i class="fas fa-download"></i> Download PDF
+                            <a href="https://www.dropbox.com/scl/fi/mg1hz6ew56n681koekhf2/The-world-of-China-_compressed.pdf?rlkey=nb4o5fadp3gdzab9ny6br1bpg&st=suhw5jma&dl=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-download"></i> Download PDF (Compressed)
                             </a>
-                            <a href="https://www.dropbox.com/scl/fi/ibrujz2bo36qdh1xya5eb/The-world-of-China.pdf?rlkey=zfuuk0njecrsysdal1j6nvcjo&st=sdy8ldf8&dl=0" class="btn btn-secondary" target="_blank">
+                            <a href="https://www.dropbox.com/scl/fi/mg1hz6ew56n681koekhf2/The-world-of-China-_compressed.pdf?rlkey=nb4o5fadp3gdzab9ny6br1bpg&st=suhw5jma&dl=0" class="btn btn-secondary" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> Preview Online
                             </a>
                         </div>
@@ -532,14 +584,30 @@
             const downloadButtons = document.querySelectorAll('.btn-primary');
             const previewButtons = document.querySelectorAll('.btn-secondary');
             
+            // Initialize download counts from localStorage or set to 0
+            let downloadCounts = {
+                pakistan: localStorage.getItem('pakistanDownloads') ? parseInt(localStorage.getItem('pakistanDownloads')) : 0,
+                kenya: localStorage.getItem('kenyaDownloads') ? parseInt(localStorage.getItem('kenyaDownloads')) : 0,
+                china: localStorage.getItem('chinaDownloads') ? parseInt(localStorage.getItem('chinaDownloads')) : 0
+            };
+            
             // Track download events
             downloadButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     // Get the country name from the card
                     const card = this.closest('.pdf-card');
-                    const country = card.querySelector('.card-title').textContent;
+                    const countryClass = Array.from(card.classList).find(cls => cls.includes('-card'));
+                    let countryKey = '';
                     
-                    // Show download confirmation (optional visual feedback)
+                    if (countryClass.includes('pakistan')) countryKey = 'pakistan';
+                    else if (countryClass.includes('kenya')) countryKey = 'kenya';
+                    else if (countryClass.includes('china')) countryKey = 'china';
+                    
+                    // Increment download count
+                    downloadCounts[countryKey]++;
+                    localStorage.setItem(countryKey + 'Downloads', downloadCounts[countryKey]);
+                    
+                    // Show download confirmation
                     const originalText = this.innerHTML;
                     this.innerHTML = '<i class="fas fa-check"></i> Downloading...';
                     this.style.opacity = '0.8';
@@ -549,8 +617,8 @@
                         this.style.opacity = '1';
                     }, 1500);
                     
-                    // Log download event (in a real app, you might send this to analytics)
-                    console.log(`Download initiated for: ${country}`);
+                    // Log download event
+                    console.log(`Download initiated for: ${countryKey.toUpperCase()}. Total downloads: ${downloadCounts[countryKey]}`);
                 });
             });
             
@@ -617,7 +685,7 @@
                 observer.observe(card);
             });
             
-            // Add a subtle background animation
+            // Add a subtle background animation to header
             const header = document.querySelector('header');
             let angle = 0;
             
@@ -629,6 +697,12 @@
             
             // Start the gradient animation
             updateGradient();
+            
+            // Add tooltip for compressed files
+            const compressedBadges = document.querySelectorAll('.compressed-badge');
+            compressedBadges.forEach(badge => {
+                badge.title = "Smaller file size for faster downloading";
+            });
         });
     </script>
 </body>
